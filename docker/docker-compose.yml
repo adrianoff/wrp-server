@@ -1,0 +1,44 @@
+version: "2"
+
+services:
+
+  maria_backend:
+    container_name: maria_backend
+    environment:
+      - MYSQL_DATABASE=wrp_server_db
+      - MYSQL_USER=wrp
+      - MYSQL_PASSWORD=wrp
+      - MYSQL_ROOT_PASSWORD=wrp
+    image: mariadb:10.4.12
+    ports:
+        - "3306:3306"
+    volumes:
+        - ./mariadb/data:/var/lib/mysql
+        - ./mariadb/dumps/:/var/dumps
+        - ./mariadb/my.cnf:/etc/mysql/conf.d/override.cnf
+    labels:
+        org.label-schema.group: "backend"
+
+  django_backend:
+    container_name: django_backend
+    build:
+      context: ..
+      dockerfile: ./docker/python/Dockerfile
+    command: python ../wrp-server/manage.py runserver 0.0.0.0:8000
+    #command: tail -F /var/log/syslog
+    volumes:
+      - ..:/usr/src/wrp-server
+    ports:
+      - 8000:8000
+    links:
+      - maria_backend
+    env_file:
+      - ./.env.dev
+    labels:
+      org.label-schema.group: "backend"
+
+  redis_backend:
+    container_name: redis_backend
+    image: phpdockerio/redis:latest
+    labels:
+        org.label-schema.group: "backend"
