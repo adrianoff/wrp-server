@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 
 services:
 
@@ -24,13 +24,15 @@ services:
     build:
       context: ..
       dockerfile: ./docker/python/Dockerfile
-    command: python ../wrp-server/manage.py runserver 0.0.0.0:8000
+    command: bash -c "./docker/wait-for-it.sh maria_backend:3306 && python ./manage.py runserver 0.0.0.0:8000"
     #command: tail -F /var/log/syslog
     volumes:
       - ..:/usr/src/wrp-server
     ports:
       - 8000:8000
     links:
+      - maria_backend
+    depends_on:
       - maria_backend
     env_file:
       - ./.env.dev
