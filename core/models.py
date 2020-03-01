@@ -1,3 +1,14 @@
 from django.db import models
 
-# Create your models here.
+
+class Painter(models.Model):
+    name = models.CharField(max_length=255)
+    url = models.TextField()
+
+
+class Picture(models.Model):
+    painter = models.ForeignKey(Painter, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=255)
+    year = models.CharField(max_length=4)
+    file_name = models.CharField(max_length=255)
+    link_info = models.TextField()
