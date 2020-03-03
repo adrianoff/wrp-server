@@ -10,5 +10,5 @@ class Picture(models.Model):
     painter = models.ForeignKey(Painter, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=255)
     year = models.CharField(max_length=4)
-    file = models.FileField(upload_to='pictures', default='')
+    file = models.FileField(upload_to='static/pictures', default='')
     link_info = models.TextField()
