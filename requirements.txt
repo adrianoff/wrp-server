@@ -4,3 +4,5 @@ pytz==2019.3
 sqlparse==0.3.0
 mysqlclient==1.4.6
 pillow==7.0.0
+beautifulsoup4==4.8.2
+requests==2.23.0
