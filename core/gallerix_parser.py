@@ -32,13 +32,30 @@ headers = {
 
 for painter_url in painters_urls:
     req = requests.get(painter_url, headers=headers, verify=False)
-    soup = BeautifulSoup(req.content, 'html.parser')
 
+    if req.status_code != 200:
+        continue
+
+    soup = BeautifulSoup(req.content, 'html.parser')
     painter_name = str(soup.find('b', itemprop='name').contents[0])
-    painter_object = Painter.objects.filter(url=painter_url)
+
+    try:
+        painter_object = Painter.objects.get(url=painter_url)
+    except Painter.DoesNotExist:
+        painter_object = Painter()
+        painter_object.name = painter_name
+        painter_object.url = painter_url
+        painter_object.save()
 
     divs = soup.find_all("div", class_="pic")
 
     for div in divs[0:20]:
         picture_link = BASE_URL + div.find('a')['href']
+        try:
+            picture_object = Picture.objects.get(link_info=picture_link)
+            continue
+        except Painter.DoesNotExist:
+            req = requests.get(picture_link, headers=headers, verify=False)
+            soup = BeautifulSoup(req.content, 'html.parser')
 
+            picture_name = str(soup.find('h1', class_='panel-title').contents[0])

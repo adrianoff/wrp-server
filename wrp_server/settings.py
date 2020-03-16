@@ -88,6 +88,10 @@ DATABASES = {
         'PASSWORD': 'wrp',
         'HOST': 'maria_backend',
         'PORT': '',
+        'OPTIONS': {
+            'charset': 'utf8',
+            'use_unicode': True,
+        },
     }
 }
 
