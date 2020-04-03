@@ -24,4 +24,4 @@ def get_random_picture(request):
         'painter': picture.painter.name
     }
 
-    return HttpResponse(json.dumps(picture_dict))
+    return HttpResponse(json.dumps(picture_dict, ensure_ascii=False))
