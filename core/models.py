@@ -5,6 +5,9 @@ class Painter(models.Model):
     name = models.CharField(max_length=255)
     url = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class Picture(models.Model):
     painter = models.ForeignKey(Painter, on_delete=models.SET_NULL, null=True)
@@ -12,3 +15,6 @@ class Picture(models.Model):
     year = models.CharField(max_length=4)
     file = models.ImageField(upload_to='static/pictures', default='')
     link_info = models.TextField()
+
+    def __str__(self):
+        return self.name
