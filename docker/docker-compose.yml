@@ -17,14 +17,16 @@ services:
         - ./mariadb/dumps/:/var/dumps
         - ./mariadb/my.cnf:/etc/mysql/conf.d/override.cnf
     labels:
-        org.label-schema.group: "backend"
+          org.label-schema.group: "backend"
 
   django_backend:
     container_name: django_backend
     build:
       context: ..
       dockerfile: ./docker/python/Dockerfile
-    command: bash -c "./docker/wait-for-it.sh maria_backend:3306 && python ./manage.py runserver 0.0.0.0:8000"
+    #command: bash -c "./docker/wait-for-it.sh maria_backend:3306 && python ./manage.py runserver 0.0.0.0:8000"
+    command: bash -c "./docker/wait-for-it.sh maria_backend:3306 && gunicorn --bind 0.0.0.0:8000 --workers 3 --timeout 200 --log-level=debug wrp_server.wsgi:application"
+
     #command: tail -F /var/log/syslog
     volumes:
       - ..:/usr/src/wrp-server

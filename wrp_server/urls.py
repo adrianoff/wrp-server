@@ -19,9 +19,14 @@ from django.urls import path
 from django.conf import settings
 from core.views import index, get_random_picture
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     #path('', index),
     path('api/random/picture', get_random_picture),
     path('admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# ... the rest of your URLconf goes here ...
+
+urlpatterns += staticfiles_urlpatterns()
