@@ -3,3 +3,5 @@ __pycache__
 .idea
 venv
 /docker/mariadb/data/*
+/static/
+
