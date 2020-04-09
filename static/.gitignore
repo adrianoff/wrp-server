@@ -1,0 +1,6 @@
+__pycache__
+*.pyc
+.idea
+venv
+/docker/mariadb/data/*
+/static/pictures/*
