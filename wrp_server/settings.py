@@ -137,5 +137,5 @@ STATIC_ROOT = "/usr/src/wrp-server/static/"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/usr/src/wrp-server/static/',
+    #'/usr/src/wrp-server/static/',
 ]
