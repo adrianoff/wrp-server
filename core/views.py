@@ -11,7 +11,7 @@ def index(request):
 
 
 def get_random_picture(request):
-    pictures_ids = list(Picture.objects.filter().values_list('id', flat=True))
+    pictures_ids = list(Picture.objects.filter(is_active=True).values_list('id', flat=True))
     if len(pictures_ids) == 0:
         return HttpResponse(json.dumps([]))
 

@@ -15,6 +15,7 @@ class Picture(models.Model):
     year = models.CharField(max_length=4)
     file = models.ImageField(upload_to='static/pictures', default='')
     link_info = models.TextField()
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
