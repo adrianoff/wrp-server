@@ -10,7 +10,7 @@ class Painter(models.Model):
 
 
 class Picture(models.Model):
-    painter = models.ForeignKey(Painter, on_delete=models.CASCADE, null=False)
+    painter = models.ForeignKey(Painter, on_delete=models.PROTECT, null=False)
     name = models.CharField(max_length=255)
     year = models.CharField(max_length=4, null=True)
     file = models.ImageField(upload_to='static/pictures', default='')
