@@ -68,6 +68,6 @@ services:
 
   redis_backend:
     container_name: redis_backend
-    image: phpdockerio/redis:latest
+    image: redis:latest
     labels:
         org.label-schema.group: "backend"

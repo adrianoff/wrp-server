@@ -135,7 +135,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = "/usr/src/wrp-server/static/"
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, "static"),
-    #'/usr/src/wrp-server/static/',
+    os.path.join(BASE_DIR, "static"),
+    '/usr/src/wrp-server/static/',
 ]

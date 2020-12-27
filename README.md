@@ -2,6 +2,7 @@
 
 Server App for wallpaper-rotator-plus
 
+Please install `sudo apt-get install libmysqlclient-dev`
 
 How to create virtual env: 
 
