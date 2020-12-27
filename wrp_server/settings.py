@@ -140,5 +140,5 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/usr/src/wrp-server/static/',
+    #'/usr/src/wrp-server/static/',
 ]
